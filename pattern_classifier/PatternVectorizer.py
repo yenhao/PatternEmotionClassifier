@@ -21,7 +21,7 @@ class PatternVectorizer:
     return X
     
   def count_vocab(self, text):
-    return self.vocabulary.regex.apply(lambda voc: len(voc.findall(text)))    
+    return self.vocabulary.regex.apply(lambda voc: len(voc.findall(text.lower())))    
   
   @classmethod
   def token_to_regexp(cls, token):

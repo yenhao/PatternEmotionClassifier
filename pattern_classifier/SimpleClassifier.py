@@ -34,7 +34,7 @@ class SimpleClassifier:
 
   def get_top_emotion_ambiguous(self, documentPatternVectors, n=1, ascending=True):
     d = 1 if ascending else -1
-    return [[self.classes[c] for c in vect[::d][:n] + ['false'] if vect.std() < 0.3 else ['true'] ] for vect in self.get_emotion_score(documentPatternVectors).argsort()]
+    return [[self.classes[c] for c in vect.argsort()[::d][:n]] + (['false'] if vect.std() > 0.3 else ['true']) for vect in self.get_emotion_score(documentPatternVectors)]
   
   @classmethod
   def load_from_folder(cls, patternFolderPath, rank='average', ascending=False):
